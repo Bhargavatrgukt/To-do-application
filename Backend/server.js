@@ -20,6 +20,16 @@ app.use('/api/auth', authRoutes);
 // To-do routes
 app.use('/api/todos', todoRoutes);
 
+app.get('/', (req, res) => {
+  res.send('Welcome to the To-Do API. Use /api/auth for authentication routes and /api/todos for to-do routes.');
+});
+
+// Handle 404 for undefined routes
+app.use((req, res, next) => {
+  res.status(404).send('Route not found');
+});
+
+
 // Start the server and connect to MongoDB
 app.listen(PORT, () => {
   connectToMongoDb();
